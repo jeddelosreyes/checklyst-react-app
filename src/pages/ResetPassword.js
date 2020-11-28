@@ -10,14 +10,16 @@ import {
 
 import { useHistory } from "react-router-dom";
 import AuthService from "../services/auth.service";
+import SweetAlert from "sweetalert2-react";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
-  const [isResetRequest, setResetRequest] = useState(false);
+  const [isResetRequest, setResetRequest] = useState(true);
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [alertShow, setAlertShow] = useState(false);
   const actionMapping = {
     token: setToken,
     email: setEmail,
@@ -82,6 +84,7 @@ const ResetPassword = () => {
 
   return (
     <div>
+      <SweetAlert show={alertShow} text={message}  onConfirm={() => setAlertShow(false)}/>
       <Jumbotron hidden={!isResetRequest}>
         <p>
           Enter your email address and we’ll send a token to reset your password

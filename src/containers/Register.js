@@ -7,7 +7,7 @@ import { isEmail } from "validator";
 import AuthService from "../services/auth.service";
 
 import { useHistory } from "react-router-dom";
-
+import SweetAlert from "sweetalert2-react";
 import {
   Button,
   Modal,
@@ -60,6 +60,8 @@ const Register = () => {
   const [modal, setModal] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  const [alertShow, setAlertShow] = useState(false);
 
   const history = useHistory();
 
@@ -142,6 +144,7 @@ const Register = () => {
   };
   return (
     <div>
+      <SweetAlert show={alertShow} text={message}  onConfirm={() => setAlertShow(false)}/>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalBody>{modalContent}</ModalBody>
         <ModalFooter>

@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const API_URL = "https://checklyst.ca/api";
+const API_URL = "https://checklyst.ca/api/accounts";
 
 const register = (email, password, confirmPassword) => {
-  return axios.post(API_URL + "/accounts/register", {
+  return axios.post(API_URL + "/register", {
     title: "Mr",
     firstName: "John",
     lastName: "Doe",
@@ -16,20 +16,20 @@ const register = (email, password, confirmPassword) => {
 };
 
 const verify = (email, token) => {
-  return axios.post(API_URL + "/accounts/verify-email", {
+  return axios.post(API_URL + "/verify-email", {
     Email: email,
     Token: token,
   });
 };
 
 const forgotPassword = (email) => {
-  return axios.post(API_URL + "/accounts/forgot-password", {
+  return axios.post(API_URL + "/forgot-password", {
     email: email,
   });
 };
 
 const resetPassword = (token, password, confirmPassword) => {
-  return axios.post(API_URL + "/accounts/reset-password", {
+  return axios.post(API_URL + "/reset-password", {
     token: token,
     password: password,
     confirmPassword: confirmPassword,
@@ -38,7 +38,7 @@ const resetPassword = (token, password, confirmPassword) => {
 
 const login = (email, password) => {
   return axios
-    .post(API_URL + "/accounts/authenticate", {
+    .post(API_URL + "/authenticate", {
       email: email,
       password: password,
     })
@@ -48,6 +48,13 @@ const login = (email, password) => {
       }
       return response.data;
     });
+};
+
+const resendVerification = (email) => {
+  return axios
+  .post(API_URL + "/resend-verification", {
+    Email: email
+  });
 };
 
 const logout = () => {
@@ -66,4 +73,5 @@ export default {
   login,
   logout,
   getCurrentUser,
+  resendVerification
 };

@@ -10,6 +10,8 @@ import { Container, Button, Spinner, FormGroup } from "reactstrap";
 
 import { useHistory } from "react-router-dom";
 
+import SweetAlert from "sweetalert2-react";
+
 const required = (value) => {
   if (!value) {
     return (
@@ -28,6 +30,7 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [alertShow, setAlertShow] = useState(false);
 
   const history = useHistory();
 
@@ -65,6 +68,7 @@ const Login = (props) => {
 
           setLoading(false);
           setMessage(resMessage);
+          setAlertShow(true);
         }
       );
     } else {
@@ -73,7 +77,9 @@ const Login = (props) => {
   };
 
   return (
-    <Container>
+    <div>
+      <SweetAlert show={alertShow} text={message}  onConfirm={() => setAlertShow(false)}/>
+      <Container>
       <h4>Login</h4>
       <Form onSubmit={handleLogin} ref={form}>
         <FormGroup block>
@@ -116,6 +122,8 @@ const Login = (props) => {
         <CheckButton style={{ display: "none" }} ref={checkBtn} />
       </Form>
     </Container>
+    </div>
+   
   );
 };
 
