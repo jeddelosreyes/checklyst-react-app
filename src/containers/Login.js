@@ -78,52 +78,54 @@ const Login = (props) => {
 
   return (
     <div>
-      <SweetAlert show={alertShow} text={message}  onConfirm={() => setAlertShow(false)}/>
+      <SweetAlert
+        show={alertShow}
+        text={message}
+        onConfirm={() => setAlertShow(false)}
+      />
       <Container>
-      <h4>Login</h4>
-      <Form onSubmit={handleLogin} ref={form}>
-        <FormGroup block>
-          <Input
-            type='text'
-            className='form-control'
-            name='username'
-            value={username}
-            onChange={onChangeUsername}
-            validations={[required]}
-            placeholder='Email'
-          />
-        </FormGroup>
-        <FormGroup block>
-          <Input
-            type='password'
-            className='form-control'
-            name='password'
-            value={password}
-            onChange={onChangePassword}
-            validations={[required]}
-            placeholder='Password'
-          />
-        </FormGroup>
-        {message && (
-          <div className='form-group'>
-            <div className='alert alert-danger' role='alert'>
-              {message}
+        <Form onSubmit={handleLogin} ref={form}>
+          <FormGroup block>
+            <Input
+              type='text'
+              className='form-control'
+              name='username'
+              value={username}
+              onChange={onChangeUsername}
+              validations={[required]}
+              placeholder='Email'
+            />
+          </FormGroup>
+          <FormGroup block>
+            <Input
+              type='password'
+              className='form-control'
+              name='password'
+              value={password}
+              onChange={onChangePassword}
+              validations={[required]}
+              placeholder='Password'
+            />
+          </FormGroup>
+          {message && (
+            <div className='form-group'>
+              <div className='alert alert-danger' role='alert'>
+                {message}
+              </div>
             </div>
-          </div>
-        )}
-        <FormGroup>
-          <Button color='primary' block disabled={loading}>
-            {loading && <Spinner size='sm'></Spinner>} <span>Login</span>
-          </Button>
-          <Link to={"/reset-password"} pull>
-            Forgot password?
-          </Link>
-        </FormGroup>
-        <CheckButton style={{ display: "none" }} ref={checkBtn} />
-      </Form>
-    </Container>
+          )}
+          <FormGroup>
+            <Link to={"/reset-password"} pull className="forgot float-right p-3">
+              <i>Forgot password?</i>
+            </Link>
+            <Button color='primary' block disabled={loading}>
+              {loading && <Spinner size='sm'></Spinner>} <span>Login</span>
+            </Button>
+          </FormGroup>
+          <CheckButton style={{ display: "none" }} ref={checkBtn} />
+        </Form>
+      </Container>
     </div>
-   
   );
 };
 

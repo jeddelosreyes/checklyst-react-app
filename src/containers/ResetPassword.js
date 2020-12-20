@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import {
   Button,
+  Container,
   Form,
   FormGroup,
   Input,
@@ -14,7 +15,7 @@ import SweetAlert from "sweetalert2-react";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
-  const [isResetRequest, setResetRequest] = useState(true);
+  const [isResetRequest, setResetRequest] = useState(false);
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -85,9 +86,9 @@ const ResetPassword = () => {
   return (
     <div>
       <SweetAlert show={alertShow} text={message}  onConfirm={() => setAlertShow(false)}/>
-      <Jumbotron hidden={!isResetRequest}>
+      <Container hidden={!isResetRequest}>
         <p>
-          Enter your email address and we’ll send a token to reset your password
+          Please enter your registered email address. 
         </p>
         <Form>
           <FormGroup>
@@ -107,14 +108,14 @@ const ResetPassword = () => {
               </div>
             </div>
           )}
-          <Button block onClick={onResetRequest}>
+          <Button block onClick={onResetRequest} color="primary">
             Submit
           </Button>
         </Form>
-      </Jumbotron>
-      <Jumbotron hidden={isResetRequest}>
+      </Container>
+      <Container hidden={isResetRequest}>
         <p>
-          Enter the token your received and your new password
+          Please enter your new password and the token from your email. 
         </p>
         <Form>
           <FormGroup>
@@ -156,11 +157,11 @@ const ResetPassword = () => {
               </div>
             </div>
           )}
-          <Button block onClick={onResetPassword}>
+          <Button block onClick={onResetPassword} color="primary">
             Submit
           </Button>
         </Form>
-      </Jumbotron>
+      </Container>
     </div>
   );
 };

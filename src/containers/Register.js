@@ -8,6 +8,7 @@ import AuthService from "../services/auth.service";
 
 import { useHistory } from "react-router-dom";
 import SweetAlert from "sweetalert2-react";
+
 import {
   Button,
   Modal,
@@ -154,7 +155,6 @@ const Register = () => {
         </ModalFooter>
       </Modal>
       <Container>
-        <h4>Register</h4>
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
             <div>
@@ -216,7 +216,7 @@ const Register = () => {
                     Privacy Policy
                   </Button>
                 </p>
-                <Button outline color='primary' block disabled={loading}>
+                <Button color='primary' block disabled={loading}>
                   {loading && <Spinner size='sm'></Spinner>}{" "}
                   <span>Sign Up</span>
                 </Button>

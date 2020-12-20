@@ -4,9 +4,7 @@ import {
   Button,
   Form,
   FormGroup,
-  Input,
-  Container,
-  Jumbotron,
+  Input
 } from "reactstrap";
 import { useHistory } from "react-router-dom";
 
@@ -85,41 +83,32 @@ const VerifyAccount = () => {
 
   return (
     <div>
-      <SweetAlert show={alertShow} text={message}  onConfirm={() => setAlertShow(false)}/>
-      <Jumbotron>
-        <Container>
-          <Form>
-            <FormGroup row>
-              <Input
-                type='text'
-                name='token'
-                id='token'
-                value={token}
-                onChange={onTokenChange}
-                placeholder='Enter token your here'
-              />
-              <Button color='primary' onClick={onSubmit}>
-                Submit
-              </Button>{" "}
-              <Button color='success' onClick={onResend}>
-                Resend Verification
-              </Button>{" "}
-            </FormGroup>
-          </Form>
-          {message && (
-            <div className='form-group'>
-              <div
-                className={
-                  successful ? "alert alert-success" : "alert alert-danger"
-                }
-                role='alert'
-              >
-                {message}
-              </div>
-            </div>
-          )}
-        </Container>
-      </Jumbotron>
+      <SweetAlert
+        show={alertShow}
+        text={message}
+        onConfirm={() => setAlertShow(false)}
+      />
+      <Form>
+        <p>Please enter the token to activate your account.</p>
+        <FormGroup row>
+          <Input
+            type='text'
+            name='token'
+            id='token'
+            value={token}
+            onChange={onTokenChange}
+            placeholder='Enter token your here'
+          />
+          <div className='p-2'>
+            <Button size='lg' color='primary' block onClick={onSubmit}>
+              Submit
+            </Button>
+            <Button size='lg' block onClick={onResend}>
+              Resend Verification
+            </Button>
+          </div>
+        </FormGroup>
+      </Form>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Switch, Route } from "react-router-dom";
 import "./App.css";
 import {
   Collapse,
@@ -17,13 +16,19 @@ import {
 // pages
 import GuestHome from "./pages/GuestHome";
 import Home from "./pages/Home";
-import VerifyAccount from "./pages/VerifyAccount";
-import ResetPassword from "./pages/ResetPassword";
+import VerifyAccount from "./containers/VerifyAccount";
+import ResetPassword from "./containers/ResetPassword";
+import {
+  BsFillPersonFill,
+  BsFillHouseFill,
+  BsFillEnvelopeFill,
+} from "react-icons/bs";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import AuthService from "./services/auth.service";
 
 const App = () => {
-  const currentUser = AuthService.getCurrentUser();
+  const currentUser = true;
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
@@ -33,42 +38,39 @@ const App = () => {
 
   return (
     <div>
-      <Navbar color='faded' light>
-        <NavbarBrand href='/'>CheckLyst</NavbarBrand>
+      <Navbar className='header'>
+        <NavbarBrand href='/' className='logo'>
+          <img src='/images/Checklyst-Web Design_checklist_logo.svg' />
+        </NavbarBrand>
         {currentUser && (
-          <div>
-            {/* <NavbarToggler onClick={toggleNavbar} className='mr-2' /> */}
-            <NavbarText>
-              <Button color='secondary' onClick={toggleNavbar}>
-                {currentUser.firstName + " " + currentUser.lastName}
-              </Button>
-            </NavbarText>
-            <Collapse isOpen={!collapsed} navbar>
-              <Nav navbar>
-                <NavItem>
-                  <NavLink href='/home'>Home</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href='/home' onClick={logOut}>
-                    LogOut
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            </Collapse>
-          </div>
+          <Nav>
+            <NavItem>
+              <BsFillHouseFill />
+              <NavLink href='#'>Home</NavLink>
+            </NavItem>
+            <NavItem>
+              <BsFillEnvelopeFill />
+              <NavLink href='#'>Message</NavLink>
+            </NavItem>
+            <NavItem>
+              <BsFillPersonFill />
+              <NavLink href='/profile' className='active'>
+                Profile
+              </NavLink>
+            </NavItem>
+          </Nav>
         )}
       </Navbar>
-      <Container fluid={true}>
-        <Switch>
-          <Route
-            exact
-            path={["/", "/home"]}
-            component={currentUser ? Home : GuestHome}
-          />
-          <Route path='/:email/verify' component={VerifyAccount} />
-          <Route path='/reset-password' component={ResetPassword} />
-        </Switch>
-      </Container>
+      <div>
+        <Router>
+          <Switch>
+            <Route path='/' component={currentUser ? Home : GuestHome} />
+          </Switch>
+        </Router>
+
+        {/* <Route path='/:email/verify' component={VerifyAccount} />
+        <Route path='/reset-password' component={ResetPassword} /> */}
+      </div>
     </div>
   );
 };
