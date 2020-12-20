@@ -28,7 +28,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AuthService from "./services/auth.service";
 
 const App = () => {
-  const currentUser = true;
+  const currentUser = AuthService.getCurrentUser();
   const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
